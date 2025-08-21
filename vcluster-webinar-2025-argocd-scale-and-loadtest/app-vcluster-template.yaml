@@ -1,0 +1,88 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ${CLUSTER}
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: ${CLUSTER}
+    server: "https://kubernetes.default.svc"
+  sources:
+    - repoURL: https://github.com/la-cc/vcluster-webinar-2025-argocd-scale-test.git
+      targetRevision: main
+      path: "./managed-service-catalog/helm/vcluster"
+      helm:
+        ignoreMissingValueFiles: true
+        releaseName: "${CLUSTER}"
+        valueFiles:
+          - "values.yaml"
+        values: |
+          vcluster:
+            controlPlane:
+              coredns:
+                deployment:
+                  tolerations:
+                    - key: "role"
+                      operator: "Equal"
+                      value: "app"
+                      effect: "NoSchedule"
+                  nodeSelector:
+                    role: "app"
+              proxy:
+                extraSANs:
+                  - ${CLUSTER}.controlplane-demo.stackit.run
+              ingress:
+                enabled: true
+                host: "${CLUSTER}.controlplane-demo.stackit.run"
+                pathType: ImplementationSpecific
+                annotations:
+                  nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+                  nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+                  nginx.ingress.kubernetes.io/ssl-redirect: "true"
+                  cert-manager.io/cluster-issuer: letsencrypt-prod
+                spec:
+                  ingressClassName: nginx
+              statefulSet:
+                scheduling:
+                  nodeSelector:
+                    role: "app"
+                  tolerations:
+                    - key: "role"
+                      operator: "Equal"
+                      value: "app"
+                      effect: "NoSchedule"
+              backingStore:
+                etcd:
+                  deploy:
+                    statefulSet:
+                      scheduling:
+                        nodeSelector:
+                          role: "app"
+                        tolerations:
+                          - key: "role"
+                            operator: "Equal"
+                            value: "app"
+                            effect: "NoSchedule"
+  project: controlplane-demo
+  ignoreDifferences:
+    - group: apps
+      kind: StatefulSet
+      name: ${CLUSTER}
+      namespace: ${CLUSTER}
+      jsonPointers:
+        - /spec/updateStrategy
+        - /spec/volumeClaimTemplates
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+      allowEmpty: true
+    syncOptions:
+      - CreateNamespace=false
+      - PruneLast=true
+      - FailOnSharedResource=true
+      - RespectIgnoreDifferences=true
+      - ApplyOutOfSyncOnly=true
+      - ServerSideApply=true
