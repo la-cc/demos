@@ -41,10 +41,10 @@ spec:
             {%- endif %}
               proxy:
                 extraSANs:
-                  - vcluster-{{ cluster.project }}.platformcon.stackit.run
+                  - vcluster-{{ cluster.project }}.pe-org-lecture.stackit.run
               ingress:
                 enabled: true
-                host: "vcluster-{{ cluster.project }}.platformcon.stackit.run"
+                host: "vcluster-{{ cluster.project }}.pe-org-lecture.stackit.run"
                 pathType: ImplementationSpecific
                 annotations:
                   nginx.ingress.kubernetes.io/backend-protocol: HTTPS

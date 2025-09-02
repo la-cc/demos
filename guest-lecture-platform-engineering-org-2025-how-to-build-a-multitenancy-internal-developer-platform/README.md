@@ -61,7 +61,7 @@ config-template --all
 Need to jump into the cluster?
 
 ```bash
-vcluster connect vcluster-project-x -n vcluster-project-x --server=vcluster-project-x.platformcon.stackit.run --print --kube-config-context-name vcluster-project-x > vcluster-project-x.yaml
+vcluster connect vcluster-project-x -n vcluster-project-x --server=vcluster-project-x.pe-org-lecture.stackit.run --print --kube-config-context-name vcluster-project-x > vcluster-project-x.yaml
 
 kubectl --kubeconfig vcluster-project-x.yaml get ns
 ```
@@ -169,7 +169,7 @@ terraform apply --auto-approve
 Deploy. Test. All yours:
 
 ```bash
-vcluster connect vcluster-project-y -n vcluster-project-y --server=vcluster-project-y.platformcon.stackit.run --print --kube-config-context-name vcluster-project-y > vcluster-project-y.yaml
+vcluster connect vcluster-project-y -n vcluster-project-y --server=vcluster-project-y.pe-org-lecture.stackit.run --print --kube-config-context-name vcluster-project-y > vcluster-project-y.yaml
 
 kubectl --kubeconfig vcluster-project-y.yaml get ns
 ```
