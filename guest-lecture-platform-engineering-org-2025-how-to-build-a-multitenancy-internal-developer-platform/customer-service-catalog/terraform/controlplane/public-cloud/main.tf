@@ -49,7 +49,7 @@ module "public-cloud" {
       maximum            = 4
       minimum            = 2
       name               = "pool-infra"
-      os_version_min     = "4152.2.3"
+      os_version_min     = "4230.2.0"
 
       labels = {
         "project" = "public-cloud-workshop"
@@ -71,7 +71,7 @@ module "public-cloud" {
       maximum            = 4
       minimum            = 2
       name               = "pool-shared"
-      os_version_min     = "4152.2.3"
+      os_version_min     = "4230.2.0"
 
       labels = {
         "project" = "public-cloud-workshop"
@@ -86,7 +86,7 @@ module "public-cloud" {
       maximum            = 3,
       minimum            = 2,
       name               = "pool-project-x",
-      os_version_min     = "4152.2.3",
+      os_version_min     = "4230.2.0",
 
       labels = {
         "project" = "project-x"
@@ -99,7 +99,28 @@ module "public-cloud" {
           effect = "NoSchedule"
         }
       ]
+    },
+    {
+      availability_zones = ["eu01-2"],
+      machine_type       = "c1.3",
+      maximum            = 3,
+      minimum            = 2,
+      name               = "pool-project-y",
+      os_version_min     = "4230.2.0",
+
+      labels = {
+        "project" = "project-y"
+      },
+
+      taints = [
+        {
+          key    = "project",
+          value  = "project-y",
+          effect = "NoSchedule"
+        }
+      ]
     }
+
 
   ]
 
