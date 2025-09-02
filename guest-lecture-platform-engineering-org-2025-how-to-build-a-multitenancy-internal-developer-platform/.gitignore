@@ -63,3 +63,4 @@ generated_backend.tf
 .DS_Store
 
 k8s.yaml
+vcluster-project-*.yaml

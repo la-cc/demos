@@ -18,7 +18,7 @@ terraform {
     }
     stackit = {
       source  = "stackitcloud/stackit"
-      version = "0.51.0"
+      version = "0.62.0"
     }
   }
 }
@@ -71,7 +71,7 @@ module "public-cloud" {
       maximum            = 4
       minimum            = 2
       name               = "pool-shared"
-      os_version_min     = "4152.2.3"
+      os_version_min     = "4230.2.0"
 
       labels = {
         "project" = "public-cloud-workshop"

@@ -1,11 +1,1 @@
-clusters:
-  - project: project-x
-    groupRbac: "la-demos:g-gitops"
-    argocd: "enabled"
-    nodePools:
-      - isolated: true
-  - project: project-y
-    groupRbac: "la-demos:g-gitops-2"
-    argocd: "enabled"
-    nodePools:
-      - isolated: true
+clusters: []

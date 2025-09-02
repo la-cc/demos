@@ -6,7 +6,7 @@ terraform {
     }
     stackit = {
       source  = "stackitcloud/stackit"
-      version = "0.51.0"
+      version = "0.62.0"
     }
     aws = {
       source  = "hashicorp/aws"
