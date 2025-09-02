@@ -2,7 +2,14 @@ argo-cd:
   dex:
     enabled: false
   global:
-    domain: argocd.vcluster-project-x.pe-org-lecture.stackit.run 
+    tolerations:
+      - key: "project"
+        operator: "Equal"
+        value: "project-x"
+        effect: "NoSchedule"
+    nodeSelector:
+      project: "project-x"
+    domain: argocd.vcluster-project-x.pe-org-lecture.stackit.run
     revisionHistoryLimit: 5
   server:
     ingress:

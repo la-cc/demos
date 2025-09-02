@@ -15,7 +15,7 @@ argo-cd:
     nodeSelector:
       project: "{{ cluster.project }}"
     {%- endif %}
-    domain: argocd.vcluster-{{ cluster.project }}.pe-org-lecture.stackit.run 
+    domain: argocd.vcluster-{{ cluster.project }}.pe-org-lecture.stackit.run
     revisionHistoryLimit: 5
   server:
     ingress:
