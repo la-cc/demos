@@ -28,10 +28,10 @@ spec:
             controlPlane:
               proxy:
                 extraSANs:
-                  - vcluster-project-x.platformcon.stackit.run
+                  - vcluster-project-x.pe-org-lecture.stackit.run
               ingress:
                 enabled: true
-                host: "vcluster-project-x.platformcon.stackit.run"
+                host: "vcluster-project-x.pe-org-lecture.stackit.run"
                 pathType: ImplementationSpecific
                 annotations:
                   nginx.ingress.kubernetes.io/backend-protocol: HTTPS
