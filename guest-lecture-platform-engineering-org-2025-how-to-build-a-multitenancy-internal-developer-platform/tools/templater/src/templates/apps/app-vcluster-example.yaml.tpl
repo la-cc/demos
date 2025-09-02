@@ -12,9 +12,9 @@ spec:
     namespace: vcluster-{{ cluster.project }}
     server: "https://kubernetes.default.svc"
   sources:
-    - repoURL: https://github.com/la-cc/workshop-platformcon-vcluster-gitops-idp.git
+    - repoURL: https://github.com/la-cc/demos.git
       targetRevision: main
-      path: "./managed-service-catalog/helm/vcluster"
+      path: "./guest-lecture-platform-engineering-org-2025-how-to-build-a-multitenancy-internal-developer-platform/managed-service-catalog/helm/vcluster"
       helm:
         ignoreMissingValueFiles: true
         releaseName: "vcluster-{{ cluster.project }}"

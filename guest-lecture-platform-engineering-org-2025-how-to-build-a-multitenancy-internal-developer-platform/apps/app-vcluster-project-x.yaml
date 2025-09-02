@@ -10,9 +10,9 @@ spec:
     namespace: vcluster-project-x
     server: "https://kubernetes.default.svc"
   sources:
-    - repoURL: https://github.com/la-cc/workshop-platformcon-vcluster-gitops-idp.git
+    - repoURL: https://github.com/la-cc/demos.git
       targetRevision: main
-      path: "./managed-service-catalog/helm/vcluster"
+      path: "./guest-lecture-platform-engineering-org-2025-how-to-build-a-multitenancy-internal-developer-platform/managed-service-catalog/helm/vcluster"
       helm:
         ignoreMissingValueFiles: true
         releaseName: "vcluster-project-x"
@@ -20,21 +20,12 @@ spec:
           - "values.yaml"
         values: |
           externalSecret:
-            enabled: true
+            enabled: false
           namespaceName: vcluster-project-x
           rbac:
             groupName: "la-demos:g-gitops"
           vcluster:
             controlPlane:
-              coredns:
-                deployment:
-                  tolerations:
-                    - key: "project"
-                      operator: "Equal"
-                      value: "project-x"
-                      effect: "NoSchedule"
-                  nodeSelector:
-                    project: "project-x"
               proxy:
                 extraSANs:
                   - vcluster-project-x.platformcon.stackit.run
@@ -49,27 +40,6 @@ spec:
                   cert-manager.io/cluster-issuer: letsencrypt-prod
                 spec:
                   ingressClassName: nginx
-              statefulSet:
-                scheduling:
-                  tolerations:
-                    - key: "project"
-                      operator: "Equal"
-                      value: "project-x"
-                      effect: "NoSchedule"
-                  nodeSelector:
-                    project: "project-x"
-              backingStore:
-                etcd:
-                  deploy:
-                    statefulSet:
-                      scheduling:
-                        tolerations:
-                          - key: "project"
-                            operator: "Equal"
-                            value: "project-x"
-                            effect: "NoSchedule"
-                        nodeSelector:
-                          project: "project-x"
   project: default
   syncPolicy:
     automated:

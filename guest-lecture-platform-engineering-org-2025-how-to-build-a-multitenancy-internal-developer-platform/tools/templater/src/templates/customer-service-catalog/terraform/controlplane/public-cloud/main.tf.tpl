@@ -34,12 +34,12 @@ module "public-cloud" {
 
 
   ### DNS ZONE
-  dns_name      = "platformcon.stackit.run"
-  contact_email = "artem.lajko@iits-consulting.de"
+  dns_name      = "pe-org-lecture.stackit.run"
+  contact_email = "artem@lajko.dev"
 
 
   ### Kubernetes Instance variables
-  kubernetes_version_min = "1.32.5"
+  kubernetes_version_min = "1.33.4"
 
   node_pools = [
 
