@@ -20,15 +20,6 @@ spec:
       destination:
         name: '{{name}}'
         namespace: ingress-nginx
-      ignoreDifferences:
-      - group: apps
-        jsonPointers:
-        - /spec/replicas
-        kind: Deployment
-      - group: apps
-        jsonPointers:
-        - /spec/replicas
-        kind: StatefulSet
       project: default
       sources:
       - ref: valuesRepo
