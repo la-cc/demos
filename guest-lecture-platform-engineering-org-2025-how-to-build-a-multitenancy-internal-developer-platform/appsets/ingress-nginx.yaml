@@ -39,7 +39,7 @@ spec:
           releaseName: ingress-nginx
           valueFiles:
           - values.yaml
-          - $valuesRepo/customer-service-catalog/helm/{{name}}/ingress-nginx/values.yaml
+          - $valuesRepo/guest-lecture-platform-engineering-org-2025-how-to-build-a-multitenancy-internal-developer-platform/customer-service-catalog/helm/{{name}}/ingress-nginx/values.yaml
         path: guest-lecture-platform-engineering-org-2025-how-to-build-a-multitenancy-internal-developer-platform/managed-service-catalog/helm/ingress-nginx
         repoURL: https://github.com/la-cc/demos.git
         targetRevision: main

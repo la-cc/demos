@@ -41,7 +41,7 @@ spec:
           releaseName: cert-manager
           valueFiles:
           - values.yaml
-          - $valuesRepo/customer-service-catalog/helm/{{name}}/cert-manager/values.yaml
+          - $valuesRepo/guest-lecture-platform-engineering-org-2025-how-to-build-a-multitenancy-internal-developer-platform/customer-service-catalog/helm/{{name}}/cert-manager/values.yaml
         path: guest-lecture-platform-engineering-org-2025-how-to-build-a-multitenancy-internal-developer-platform/managed-service-catalog/helm/cert-manager
         repoURL: https://github.com/la-cc/demos.git
         targetRevision: main
