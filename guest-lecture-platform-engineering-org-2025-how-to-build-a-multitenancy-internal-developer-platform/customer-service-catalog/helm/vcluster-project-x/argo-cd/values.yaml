@@ -1,0 +1,15 @@
+argo-cd:
+  dex:
+    enabled: false
+  global:
+    domain: argocd.vcluster-project-x.pe-org-lecture.stackit.run
+    revisionHistoryLimit: 5
+  server:
+    ingress:
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+        nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+        nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+      enabled: true
+      ingressClassName: nginx
+      tls: true
