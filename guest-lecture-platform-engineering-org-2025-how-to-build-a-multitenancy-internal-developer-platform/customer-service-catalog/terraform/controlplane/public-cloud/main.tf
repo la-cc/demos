@@ -80,6 +80,26 @@ module "public-cloud" {
 
       taints = []
     },
+  {
+    availability_zones = ["eu01-2"],
+    machine_type       = "c1.3",
+    maximum            = 3,
+    minimum            = 2,
+    name               = "pool-project-x",
+    os_version_min     = "4230.2.0",
+
+    labels = {
+          "project" = "project-x"
+    },
+
+    taints = [
+          {
+            key    = "project",
+            value  = "project-x",
+            effect = "NoSchedule"
+          }
+    ]
+  }
 
 
   ]
