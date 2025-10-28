@@ -1,4 +1,8 @@
-# Guest Lecture: Platform Engineering Org 2025 – How to Build a Multitenancy Internal Developer Platform (WIP)
+# Guest Lecture: Platform Engineering Org 2025 – How to Build a Multitenancy Internal Developer Platform
+
+**⚠️ Note:** this is not what you exactly see in the guest lecture, because at this moment kubara is not yet public. I am using here similar tools and approaches, so you can get the idea. I will update this repo once kubara is public!
+
+
 
 > ***Heads up:*** Build it locally if you want:
 > `docker build . -f tools/templater/build/docker/Dockerfile -t workshop-templater:0.0.0`
