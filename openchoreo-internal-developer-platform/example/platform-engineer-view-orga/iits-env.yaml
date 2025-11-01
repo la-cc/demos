@@ -1,0 +1,62 @@
+apiVersion: v1
+items:
+- apiVersion: openchoreo.dev/v1alpha1
+  kind: Environment
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: control-plane
+      meta.helm.sh/release-namespace: openchoreo-control-plane
+      openchoreo.dev/description: Development
+      openchoreo.dev/display-name: Development
+    labels:
+      app.kubernetes.io/managed-by: Helm
+      openchoreo.dev/name: development
+      openchoreo.dev/organization: iits-organization
+    name: development
+    namespace: iits-organization
+  spec:
+    dataPlaneRef: iits-dataplane
+    gateway:
+      dnsPrefix: dev
+    isProduction: false
+- apiVersion: openchoreo.dev/v1alpha1
+  kind: Environment
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: control-plane
+      meta.helm.sh/release-namespace: openchoreo-control-plane
+      openchoreo.dev/description: Production
+      openchoreo.dev/display-name: Production
+    labels:
+      app.kubernetes.io/managed-by: Helm
+      openchoreo.dev/name: production
+      openchoreo.dev/organization: iits-organization
+    name: production
+    namespace: iits-organization
+  spec:
+    dataPlaneRef: iits-dataplane
+    gateway:
+      dnsPrefix: prod
+    isProduction: true
+- apiVersion: openchoreo.dev/v1alpha1
+  kind: Environment
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: control-plane
+      meta.helm.sh/release-namespace: openchoreo-control-plane
+      openchoreo.dev/description: Staging
+      openchoreo.dev/display-name: Staging
+    labels:
+      app.kubernetes.io/managed-by: Helm
+      openchoreo.dev/name: staging
+      openchoreo.dev/organization: iits-organization
+    name: staging
+    namespace: iits-organization
+  spec:
+    dataPlaneRef: iits-dataplane
+    gateway:
+      dnsPrefix: staging
+    isProduction: false
+kind: List
+metadata:
+  resourceVersion: ""

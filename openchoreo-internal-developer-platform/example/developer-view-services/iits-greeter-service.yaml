@@ -1,0 +1,113 @@
+apiVersion: openchoreo.dev/v1alpha1
+kind: Component
+metadata:
+  name: iits-greeter-service
+  namespace: iits-organization
+spec:
+  owner:
+    projectName: iits-project
+  type: Service
+
+
+---
+
+# Defines a workload that specifies the developer contract which describes the source code including
+# what configuration is needed to run, what endpoints are exposed, and how it connects to other components or platform resources.
+apiVersion: openchoreo.dev/v1alpha1
+kind: Workload
+metadata:
+  name: iits-greeter-service
+  namespace: iits-organization
+spec:
+  owner:
+    componentName: greeter-service
+    projectName: iits-project
+  containers:
+    main:
+      image: ghcr.io/openchoreo/samples/greeter-service:latest
+      command:
+        - ./go-greeter
+      args:
+        - --port
+        - "9090"
+      env:
+        - key: LOG_LEVEL
+          value: info
+        - key: GITHUB_REPOSITORY
+          valueFrom:
+            configurationGroupRef:
+              key: repository
+              name: github
+        - key: GITHUB_TOKEN
+          valueFrom:
+            configurationGroupRef:
+              key: pat
+              name: github
+  endpoints:
+    greeter-api:
+      type: REST
+      port: 9090
+      schema:
+        type: REST
+        content: |
+          openapi: 3.0.0
+          info:
+            title: Sample API
+            version: 1.0.0
+          servers:
+            - url: /api/v1
+              description: Base API path
+          paths:
+            /reading-list:
+              get:
+                summary: Get all books in the reading list
+                responses:
+                  '200':
+                    description: Successful response
+              post:
+                summary: Add a book to the reading list
+                requestBody:
+                  content:
+                    application/json:
+                      schema:
+                        $ref: '#/components/schemas/Book'
+                responses:
+                  '201':
+                    description: Book added successfully
+          components:
+            schemas:
+              Book:
+                type: object
+                properties:
+                  title:
+                    type: string
+                  author:
+                    type: string
+
+  connections: { } # How does this look like?
+
+---
+
+# Service that specify runtime configuration for the component.
+# This can be either managed by the component controller or manually created by the user.
+apiVersion: openchoreo.dev/v1alpha1
+kind: Service
+metadata:
+  name: iits-greeter-service
+  namespace: iits-organization
+spec:
+  owner:
+    componentName: greeter-service
+    projectName: iits-project
+  workloadName: greeter-service
+  className: iits-serviceclass
+  apis:
+    greeter-api: # Should we go with map type or array type?
+      type: REST
+      className: default
+      rest:
+        backend:
+          port: 9090
+          basePath: /greeter
+        exposeLevels: [ "Organization", "Public" ]
+---

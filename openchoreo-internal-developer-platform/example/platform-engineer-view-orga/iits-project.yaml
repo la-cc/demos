@@ -1,0 +1,10 @@
+apiVersion: openchoreo.dev/v1alpha1
+kind: Project
+metadata:
+  name: iits-project
+  namespace: iits-organization
+  annotations:
+    openchoreo.dev/display-name: iits Project
+    openchoreo.dev/description: This project contains components that are used by the iits organization
+spec:
+  deploymentPipelineRef: iits-deployement-pipeline

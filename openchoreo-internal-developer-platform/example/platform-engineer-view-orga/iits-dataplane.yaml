@@ -1,0 +1,29 @@
+apiVersion: openchoreo.dev/v1alpha1
+kind: DataPlane
+metadata:
+  labels:
+    openchoreo.dev/build-plane: "true"
+    openchoreo.dev/name: default
+    openchoreo.dev/organization: iits-organization
+  name: iits-dataplane
+  namespace: iits-organization
+spec:
+  gateway:
+    organizationVirtualHost: openchoreoapis.internal
+    publicVirtualHost: openchoreoapis.localhost
+  kubernetesCluster:
+    credentials:
+      apiServerURL: https://openchoreo-control-plane:6443
+      caCert: LS0tLS1....
+      clientCert: LS0tL...
+      clientKey: LS0tLS...
+    name: kind-openchoreo
+  observer:
+    authentication:
+      basicAuth:
+        password: dummy
+        username: dummy
+    url: http://observer.openchoreo-observability-plane:8080
+  registry:
+    prefix: registry.openchoreo-data-plane:5000
+

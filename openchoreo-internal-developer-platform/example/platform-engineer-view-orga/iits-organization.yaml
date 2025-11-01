@@ -1,0 +1,8 @@
+apiVersion: openchoreo.dev/v1alpha1
+kind: Organization
+metadata:
+  name: iits-organization
+  annotations:
+    openchoreo.dev/display-name: iits Organization
+    openchoreo.dev/description: This is the iits organization for this setup
+spec: { }

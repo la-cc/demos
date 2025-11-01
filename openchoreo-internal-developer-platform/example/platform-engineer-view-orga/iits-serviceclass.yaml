@@ -1,0 +1,31 @@
+apiVersion: openchoreo.dev/v1alpha1
+kind: ServiceClass
+metadata:
+  annotations:
+    meta.helm.sh/release-name: control-plane
+    meta.helm.sh/release-namespace: openchoreo-control-plane
+  labels:
+    app.kubernetes.io/instance: control-plane
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: openchoreo-control-plane
+    app.kubernetes.io/part-of: openchoreo
+    app.kubernetes.io/version: v0.3.2
+    helm.sh/chart: openchoreo-control-plane-0.3.2
+  name: iits-serviceclass
+  namespace: iits-organization
+spec:
+  deploymentTemplate:
+    replicas: 1
+    template:
+      spec:
+        containers:
+        - name: main
+          resources:
+            limits:
+              cpu: 400m
+              memory: 256Mi
+            requests:
+              cpu: 100m
+              memory: 64Mi
+  serviceTemplate:
+    type: ClusterIP
